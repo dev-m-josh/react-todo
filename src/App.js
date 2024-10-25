@@ -59,12 +59,24 @@ function App() {
     })
   }
 
-  
-  function deleteTodo(id) {
-    setTodos(currentTodos =>{
-      return currentTodos.filter(todo => todo.todo_id !== id)
-    })
+//delete a todo
+async function deleteTodo(id) {
+  try {
+    await axios.delete(`http://localhost:3500/todos/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    //update the state to remove the todo
+    setTodos(currentTodos => {
+      return currentTodos.filter(todo => todo.todo_id !== id);
+    });
+    
+  } catch (error) {
+    console.error("Error deleting todo:", error);
   }
+}
 
   return (
   <div className='container'>
