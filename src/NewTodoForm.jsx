@@ -17,7 +17,7 @@ export default function NewTodoForm({onSubmit}) {
     <div className='App'>
       <input value={newItem} onChange={e => setNewItem(e.target.value)} type='text' id= "item" />
       <button className='addBtn'>Add</button>
-      </div>
+    </div>
     </form>
   )
 }

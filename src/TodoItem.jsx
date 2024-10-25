@@ -1,13 +1,13 @@
 import React from 'react'
 
-export default function TodoItem({ completed, id, title, toggleTodo, deleteTodo}) {
+export default function TodoItem({ todo_status, todo_id, todo_title, toggleTodo, deleteTodo}) {
   return (
-    <div className='todo'>
+    <div key={todo_id} className='todo'>
     <label>
-     <input type='checkbox' checked={completed} onChange={e => toggleTodo(id, e.target.checked)} />
-     <p>{title}</p>
+     <input type='checkbox' checked={todo_status} onChange={e => toggleTodo(todo_id, e.target.todo_status)} />
+     <p>{todo_title}</p>
    </label>
-   <button onClick={()=> deleteTodo(id)} className='delete'>Delete</button>
+   <button onClick={()=> deleteTodo(todo_id)} className='delete'>Delete</button>
     </div>
   )
 }
