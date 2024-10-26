@@ -34,29 +34,37 @@ function App() {
           'Authorization': `Bearer ${token}`
         },
       });
-
+console.log(response.data)
       setTodos((prevTodos) => [...prevTodos, response.data])
     } catch (error) {
       console.error(error);
     }
   }
-
-  // Log todos to see if the new todo is added
-  useEffect(() => {
-    console.log(todos); 
-  }, [todos]);
-  
-
-
-  function toggleTodo(id, todo_status) {
-    setTodos(currentTodos =>{
-      return currentTodos.map(todo =>{
-        if(todo.todo_id === id){
-          return {...todo, todo_status}
-        }
-        return todo
+  async function toggleTodo(id, currentState) {
+    const updatedStatus = !currentState;
+   try {
+    await axios.put(`http://localhost:3500/todos/${id}`, 
+      { todo_status: updatedStatus }, 
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      }
+    );
+      
+      setTodos(currentTodos =>{
+        return currentTodos.map(todo =>{
+          if(todo.todo_id === id){
+            return {...todo, todo_status: updatedStatus} 
+          }
+          return todo
+        })
       })
-    })
+
+    } catch (error) {
+      console.error("Error updating todo status:", error);
+    }
+
   }
 
 //delete a todo
