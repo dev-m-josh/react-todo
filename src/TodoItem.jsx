@@ -5,9 +5,9 @@ export default function TodoItem({ todo_status, todo_id, todo_title, toggleTodo,
     <div key={todo_id} className='todo'>
     <label>
      <input type='checkbox' checked={todo_status} onChange={() => toggleTodo(todo_id, todo_status)} />
-     <p>{todo_title}</p>
+     <p  className={todo_status ? 'completed' : ''}>{todo_title}</p>
    </label>
-   <button onClick={()=> deleteTodo(todo_id)} className='delete'>Delete</button>
+   <button onClick={()=> deleteTodo(todo_id)} className='delete'>✖</button>
     </div>
   )
 }

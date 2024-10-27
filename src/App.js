@@ -34,12 +34,12 @@ function App() {
           'Authorization': `Bearer ${token}`
         },
       });
-console.log(response.data)
       setTodos((prevTodos) => [...prevTodos, response.data])
     } catch (error) {
       console.error(error);
     }
   }
+
   async function toggleTodo(id, currentState) {
     const updatedStatus = !currentState;
    try {
