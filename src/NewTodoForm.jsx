@@ -15,7 +15,7 @@ export default function NewTodoForm({onSubmit}) {
   return (
     <form className="inputs" onSubmit={handleSubmits}>
     <div className='App'>
-      <input value={newItem} onChange={e => setNewItem(e.target.value)} type='text' id= "item"  />
+      <input value={newItem} onChange={e => setNewItem(e.target.value)} type='text' id= "item" placeholder='Type Todo...' />
       <button className='addBtn'>Add</button>
     </div>
     </form>

@@ -10,6 +10,7 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfbmFtZSI6
 function App() {
 
   const [todos, setTodos] = useState([]);
+  const [Query, setQuery] = useState('');
 
   useEffect(() =>{
     const fetchTodos = async ()=>{
@@ -39,7 +40,13 @@ function App() {
       console.error(error);
     }
   }
+  
+  //filter todos
+  const filteredItems = todos.filter(todo =>{
+    return todo.todo_title.toLowerCase().includes(Query.toLowerCase())
+  });  
 
+  //toggle todo
   async function toggleTodo(id, currentState) {
     const updatedStatus = !currentState;
    try {
@@ -90,8 +97,16 @@ async function deleteTodo(id) {
   <div className='container'>
     <h1 htmlFor='item'>To Do List</h1>
     <NewTodoForm onSubmit={addTodo} />
-      <h2>Task List</h2>
-    <TodoList todos ={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
+    <div className='search'>
+      <h2>Search:</h2>
+      <input 
+        type="search" 
+        placeholder='Search Todo...'
+        onChange={e => setQuery(e.target.value)}
+      />
+    </div>
+    <h2>Task List</h2>
+    <TodoList todos ={filteredItems} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
   </div>
   );
 }

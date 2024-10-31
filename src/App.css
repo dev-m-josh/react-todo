@@ -41,6 +41,7 @@
     outline: none;
     width: 100%;
     font-size: 18px;
+    padding-left: 15px;
 }
 
 .App button{
@@ -106,5 +107,24 @@
 
 .completed {
     text-decoration: line-through;
-    color: grey; /* Optional: Change color to indicate completion */
+    color: grey;
+  }
+
+  .search{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .search input{
+    font-size: 16px;
+    border-radius: 25px;
+    padding: 3px 10px 3px 15px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: #EDEEF0;
+    width: 100%;
   }
