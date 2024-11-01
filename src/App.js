@@ -26,8 +26,15 @@ function App() {
 
   //add new todo
   async function addTodo(todo_title) {
-    const newTodo = {todo_title, todo_status: false};
-
+    // Trim the todo_title and check if it's not empty
+    const trimmedTitle = todo_title.trim();
+    if (!trimmedTitle) {
+      console.error('Todo title cannot be empty.');
+      return;
+    }
+  
+    const newTodo = { todo_title: trimmedTitle, todo_status: false };
+  
     try {
       const response = await axios.post('http://localhost:3500/todos', JSON.stringify(newTodo), {
         headers: {
@@ -35,16 +42,20 @@ function App() {
           'Authorization': `Bearer ${token}`
         },
       });
-      setTodos((prevTodos) => [...prevTodos, response.data])
+  
+      // Update the todos state
+      setTodos((prevTodos) => [...prevTodos, response.data]);
     } catch (error) {
-      console.error(error);
+      console.error('Error adding todo:', error);
     }
   }
   
+  
   //filter todos
-  const filteredItems = todos.filter(todo =>{
-    return todo.todo_title.toLowerCase().includes(Query.toLowerCase())
-  });  
+  const filteredItems = Query.trim() ? todos.filter(todo => 
+    todo.todo_title.toLowerCase().includes(Query.trim().toLowerCase())
+  ) : todos;
+   
 
   //toggle todo
   async function toggleTodo(id, currentState) {
